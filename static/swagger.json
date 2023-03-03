@@ -1,0 +1,454 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Users and Accounts",
+    "version": "1.0.0",
+    "title": "Users and Accounts API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Users, Accounts, Transactions",
+      "description": "API Documentation for Umba Test"
+    }
+  ],
+  "paths": {
+    "/api/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Returns all users",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a new user",
+        "requestBody": {
+          "description": "User Request Post Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                    "firstname": {
+                        "type": "string"
+                    },
+                    "lastname": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    }
+                }
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the user to be retrieved",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user with given ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "user Request id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Failed. User not found."
+          }
+        }
+      },
+      "put": {
+        "summary": "edit a user by ID",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The id of the user to edit"
+          }
+        ],
+        "requestBody": {
+            "description": "User Request Post Object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                      "firstname": {
+                          "type": "string"
+                      },
+                      "lastname": {
+                          "type": "string"
+                      },
+                      "email": {
+                          "type": "string",
+                          "format": "email"
+                      },
+                      "phone": {
+                          "type": "string"
+                      }
+                  }
+                }
+              }
+            }
+          },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Failed. User not found."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user by ID",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "user Id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Failed. User not found."
+          }
+        }
+      }
+    },
+    "/api/accounts": {
+        "get": {
+          "tags": [
+            "Accounts"
+          ],
+          "summary": "Returns all accounts",
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Accounts"
+          ],
+          "summary": "Create a new user account",
+          "requestBody": {
+            "description": "Account Post Object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                      "userid": {
+                          "type": "integer"
+                      },
+                      "accountname": {
+                          "type": "string",
+                          "format": "email"
+                      },
+                      "status": {
+                          "type": "boolean"
+                      }
+                  }
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "201": {
+              "description": "OK"
+            },
+            "400": {
+              "description": "Failed. Bad post data."
+            }
+          }
+        }
+      },
+      "/api/accounts/{id}": {
+        "get": {
+          "tags": [
+            "Accounts"
+          ],
+          "summary": "Get account with given ID",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "account id"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "404": {
+              "description": "Failed. User not found."
+            }
+          }
+        },
+        "put": {
+          "summary": "edit an account by ID",
+          "tags": [
+            "Accounts"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "type": "integer",
+              "description": "The id of the account to edit"
+            }
+          ],
+          "requestBody": {
+              "description": "Account update Object",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                        "accountname": {
+                            "type": "string"
+                        },
+                        "status": {
+                            "type": "boolean"
+                        }
+                    }
+                  }
+                }
+              }
+            },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "404": {
+              "description": "Failed. Account not found."
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete account by ID",
+          "tags": [
+            "Accounts"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "account Id"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "OK"
+            },
+            "404": {
+              "description": "Failed. Account not found."
+            }
+          }
+        }
+      },
+      "/api/accounts/{id}/debit": {
+        "post": {
+          "tags": [
+            "Accounts"
+          ],
+          "summary": "debit from an account",
+          "requestBody": {
+            "description": "Account debit Object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                      "amount": {
+                          "type": "real"
+                      },
+                      "description": {
+                          "type": "string"
+                      }
+                  }
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "account id"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "404": {
+              "description": "Failed. Account not found."
+            }
+          }
+        }
+      },
+      "/api/accounts/{id}/credit": {
+        "post": {
+          "tags": [
+            "Accounts"
+          ],
+          "summary": "credit an account",
+          "requestBody": {
+            "description": "Account credit Object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                      "amount": {
+                          "type": "number",
+                          "multipleOf": 0.1
+                      },
+                      "description": {
+                          "type": "string"
+                      }
+                  }
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "account id"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "404": {
+              "description": "Failed. Account not found."
+            }
+          }
+        }
+      },
+      "/api/accounts/{id}/transactions": {
+        "get": {
+          "tags": [
+            "Accounts"
+          ],
+          "summary": "get all transactions for an account",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "account id"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "404": {
+              "description": "Failed. Account not found."
+            }
+          }
+        }
+      }
+  }
+}
